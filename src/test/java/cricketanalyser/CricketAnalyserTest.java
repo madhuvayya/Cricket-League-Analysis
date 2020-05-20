@@ -105,4 +105,15 @@ public class CricketAnalyserTest {
             Assert.assertEquals("Andre Russell",iplCSV[2].player);
         } catch (CricketAnalyserException e){ }
     }
+
+    @Test
+    public void givenIPL2019MostRunsData_WhenSortDataAccordingToFoursAndSixes_ShouldReturnBatsMenWhoHittedMaximum() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToFours();
+            IPL2019MostRunsCSV[] iplCSV = new Gson().fromJson(sortedMostRunsData, IPL2019MostRunsCSV[].class);
+            Assert.assertEquals("Shikhar Dhawan",iplCSV[1].player);
+        } catch (CricketAnalyserException e){ }
+    }
 }

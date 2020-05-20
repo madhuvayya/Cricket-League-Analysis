@@ -27,6 +27,11 @@ public class CricketAnalyser {
         return this.getSortedIPLData(iplDataDAOComparator);
     }
 
+    public String getSortedCricketDataAccordingToFours() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.fours);
+        return this.getSortedIPLData(iplDataDAOComparator);
+    }
+
     private String getSortedIPLData(Comparator<CricketDataDAO> cricketDataDAOComparator) throws CricketAnalyserException {
         if(cricketDataMap == null || cricketDataMap.size() ==0 ) {
             throw new CricketAnalyserException("No Census Data", CricketAnalyserException.ExceptionType.NO_CENSUS_DATA);
