@@ -3,7 +3,8 @@ package cricketanalyser;
 public class CricketAnalyserException extends Exception {
 
     enum ExceptionType {
-        IPL_FILE_PROBLEM
+        IPL_FILE_PROBLEM,
+        NO_CENSUS_DATA
     }
 
     ExceptionType type;

@@ -8,31 +8,31 @@ public class IPL2019MostRunsCSV {
     public int POS;
 
     @CsvBindByName(column = "PLAYER",required = true)
-    public String PLAYER;
+    public String player;
 
     @CsvBindByName(column = "Mat",required = true)
-    public int Mat;
+    public int matches;
 
     @CsvBindByName(column = "Inns",required = true)
-    public int Inns;
+    public int innings;
 
     @CsvBindByName(column = "NO",required = true)
-    public double NO;
+    public double notOuts;
 
     @CsvBindByName(column = "Runs",required = true)
-    public int Runs;
+    public int runs;
 
     @CsvBindByName(column = "Hs",required = true)
-    public int HS;
+    public int highScore;
 
     @CsvBindByName(column = "BF",required = true)
-    public int BF;
+    public int ballsFaced;
 
     @CsvBindByName(column = "Avg",required = true)
-    public double Avg;
+    public double average;
 
     @CsvBindByName(column = "SR",required = true)
-    public double SR;
+    public double strikeRate;
 
     @CsvBindByName(column = "4s",required = true)
     public int fours;
@@ -46,23 +46,8 @@ public class IPL2019MostRunsCSV {
     @CsvBindByName(column = "50",required = true)
     public int fifties;
 
-    @Override
-    public String toString() {
-        return "IPL2019MostRunsCSV{" +
-                "POS=" + POS +
-                ", PLAYER='" + PLAYER + '\'' +
-                ", Mat=" + Mat +
-                ", Inns=" + Inns +
-                ", NO=" + NO +
-                ", Runs=" + Runs +
-                ", HS=" + HS +
-                ", BF=" + BF +
-                ", Avg=" + Avg +
-                ", SR=" + SR +
-                ", fours=" + fours +
-                ", sixes=" + sixes +
-                ", hundreds=" + hundreds +
-                ", fifties=" + fifties +
-                '}';
+    public IPL2019MostRunsCSV(String player, double average) {
+        this.average = average;
+        this.player = player;
     }
 }
