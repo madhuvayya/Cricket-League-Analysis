@@ -1,6 +1,6 @@
 package cricketanalyser;
 
-public class IPLDataDAO {
+public class CricketDataDAO {
 
     public String player;
     public int matches;
@@ -16,7 +16,7 @@ public class IPLDataDAO {
     public int fours;
     public int sixes;
 
-    public IPLDataDAO(IPL2019MostRunsCSV ipl2019MostRunsCSV) {
+    public CricketDataDAO(IPL2019MostRunsCSV ipl2019MostRunsCSV) {
         player = ipl2019MostRunsCSV.player;
         matches = ipl2019MostRunsCSV.matches;
         innings = ipl2019MostRunsCSV.innings;
@@ -32,7 +32,7 @@ public class IPLDataDAO {
         sixes = ipl2019MostRunsCSV.sixes;
     }
 
-    public IPL2019MostRunsCSV getIPLDataDTO() {
+    public IPL2019MostRunsCSV getCricketDataDTO() {
         return new IPL2019MostRunsCSV(player, (double) average, (double) strikeRate);
     }
 }

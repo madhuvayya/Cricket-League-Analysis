@@ -18,16 +18,16 @@ import java.util.stream.StreamSupport;
 
 public class CricketAnalyser {
 
-    Map<String, IPLDataDAO> iplDataMap = null;
+    Map<String, CricketDataDAO> cricketDataMap = null;
 
-    public Map<String, IPLDataDAO> loadIPLData(String CsvFilePath) throws CricketAnalyserException {
+    public Map<String, CricketDataDAO> loadCricketData(String CsvFilePath) throws CricketAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(CsvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IPL2019MostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPL2019MostRunsCSV.class);
             Iterable<IPL2019MostRunsCSV> csvIterable = () -> csvFileIterator;
             StreamSupport.stream(csvIterable.spliterator(),false).
-                    forEach(iplDataCsv -> iplDataMap.put(iplDataCsv.player,new IPLDataDAO(iplDataCsv)));
-            return this.iplDataMap;
+                    forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player,new CricketDataDAO(iplDataCsv)));
+            return this.cricketDataMap;
         } catch (IOException ioException) {
             throw new CricketAnalyserException(ioException.getMessage(),
                     CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
@@ -40,24 +40,24 @@ public class CricketAnalyser {
         }
     }
 
-    public String getSortedIPLDataAccordingToBattingAverages() throws CricketAnalyserException {
-        Comparator<IPLDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.average);
+    public String getSortedCricketDataAccordingToBattingAverages() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> cricketDataDAOComparator = Comparator.comparing(cricketData -> cricketData.average);
+        return this.getSortedIPLData(cricketDataDAOComparator);
+    }
+
+    public String getSortedCricketDataAccordingToStrikeRates() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.strikeRate);
         return this.getSortedIPLData(iplDataDAOComparator);
     }
 
-    public String getSortedIPLDataAccordingToStrikeRates() throws CricketAnalyserException {
-        Comparator<IPLDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.strikeRate);
-        return this.getSortedIPLData(iplDataDAOComparator);
-    }
-
-    private String getSortedIPLData(Comparator<IPLDataDAO> iplDataDAOComparator) throws CricketAnalyserException {
-        if(iplDataMap == null || iplDataMap.size() ==0 ) {
+    private String getSortedIPLData(Comparator<CricketDataDAO> cricketDataDAOComparator) throws CricketAnalyserException {
+        if(cricketDataMap == null || cricketDataMap.size() ==0 ) {
             throw new CricketAnalyserException("No Census Data", CricketAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        List sortedIPLData = iplDataMap.values().stream().
-                sorted(iplDataDAOComparator).
-                map(iplDataDAO -> iplDataDAO.getIPLDataDTO()).
+        List sortedCricketData = cricketDataMap.values().stream().
+                sorted(cricketDataDAOComparator).
+                map(cricketDataDAO -> cricketDataDAO.getCricketDataDTO()).
                 collect(Collectors.toList());
-        return new Gson().toJson(sortedIPLData);
+        return new Gson().toJson(sortedCricketData);
     }
 }
