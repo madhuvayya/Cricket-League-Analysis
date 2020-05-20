@@ -1,31 +1,33 @@
 package cricketanalyser;
 
-import com.google.gson.Gson;
-
 import com.csvloader.CSVBuilderException;
 import com.csvloader.CSVBuilderFactory;
 import com.csvloader.ICSVBuilder;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class CricketAnalyser {
 
-    List<IPL2019MostRunsCSV> ipl2019RunsSheetCSVList=null;
+    Map<String, IPLDataDAO> iplDataMap = null;
 
-    Map<String, IPLDataDAO> ipl2019DataMap = null;
-
-    public int loadIPL2019Data(String CsvFilePath) throws CricketAnalyserException {
+    public Map<String, IPLDataDAO> loadIPLData(String CsvFilePath) throws CricketAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(CsvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            ipl2019RunsSheetCSVList = csvBuilder.getCSVFileList(reader, IPL2019MostRunsCSV.class);
-            return ipl2019RunsSheetCSVList.size();
+            Iterator<IPL2019MostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPL2019MostRunsCSV.class);
+            Iterable<IPL2019MostRunsCSV> csvIterable = () -> csvFileIterator;
+            StreamSupport.stream(csvIterable.spliterator(),false).
+                    forEach(iplDataCsv -> iplDataMap.put(iplDataCsv.player,new IPLDataDAO(iplDataCsv)));
+            return this.iplDataMap;
         } catch (IOException ioException) {
             throw new CricketAnalyserException(ioException.getMessage(),
                     CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
@@ -38,17 +40,21 @@ public class CricketAnalyser {
         }
     }
 
-    public String getSortedIPLDataAccordingToBattingAverages(String csvFilePath) throws CricketAnalyserException {
+    public String getSortedIPLDataAccordingToBattingAverages() throws CricketAnalyserException {
         Comparator<IPLDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.average);
         return this.getSortedIPLData(iplDataDAOComparator);
     }
 
+    public String getSortedIPLDataAccordingToStrikeRates() throws CricketAnalyserException {
+        Comparator<IPLDataDAO> iplDataDAOComparator = Comparator.comparing(iplData -> iplData.strikeRate);
+        return this.getSortedIPLData(iplDataDAOComparator);
+    }
 
     private String getSortedIPLData(Comparator<IPLDataDAO> iplDataDAOComparator) throws CricketAnalyserException {
-        if(ipl2019DataMap == null || ipl2019DataMap.size() ==0 ) {
+        if(iplDataMap == null || iplDataMap.size() ==0 ) {
             throw new CricketAnalyserException("No Census Data", CricketAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        List sortedIPLData = ipl2019DataMap.values().stream().
+        List sortedIPLData = iplDataMap.values().stream().
                 sorted(iplDataDAOComparator).
                 map(iplDataDAO -> iplDataDAO.getIPLDataDTO()).
                 collect(Collectors.toList());

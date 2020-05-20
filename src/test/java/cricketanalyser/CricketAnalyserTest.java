@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Map;
+
 public class CricketAnalyserTest {
 
     private static final String IPL2019_MOST_RUNS_CSV_FILE_PATH = "./src/test/java/resources/IPL2019FactsheetMostRuns.csv";
@@ -16,7 +18,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsCSVFile_ReturnsCorrectRecords() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            int numOfPlayers = cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            Map<String, IPLDataDAO> numOfPlayers = cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
             Assert.assertEquals(100, numOfPlayers);
         } catch (CricketAnalyserException cricketAnalyserException) { }
     }
@@ -25,7 +27,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WithWrongFileType_ShouldThrowException() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_WRONG_TYPE_FILE_PATH);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_WRONG_TYPE_FILE_PATH);
         } catch (CricketAnalyserException e) {
             Assert.assertEquals(CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
@@ -35,7 +37,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WithWrongFilePath_ShouldThrowException() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
         } catch (CricketAnalyserException e) {
             Assert.assertEquals(CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
@@ -45,7 +47,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WithIncorrectDelimiter_ShouldThrowException() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_CSV_FILE_PATH_WITH_INCORRECT_DELIMITER);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_CSV_FILE_PATH_WITH_INCORRECT_DELIMITER);
         } catch (CricketAnalyserException e) {
             Assert.assertEquals(CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
@@ -55,7 +57,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WithIncorrectHeader_ShouldThrowException() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_CSV_FILE_PATH_WITH_INCORRECT_HEADER);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_CSV_FILE_PATH_WITH_INCORRECT_HEADER);
         } catch (CricketAnalyserException e) {
             Assert.assertEquals(CricketAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
@@ -65,8 +67,8 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WhenSortDataAccordingToAverages_ShouldReturnTopAverageBatsMen() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
-            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToBattingAverages(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToBattingAverages();
             IPL2019MostRunsCSV[] iplCSV = new Gson().fromJson(sortedMostRunsData, IPL2019MostRunsCSV[].class);
             Assert.assertEquals("MS Dhoni",iplCSV[1].player);
         } catch (CricketAnalyserException e){ }
@@ -76,11 +78,33 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsData_WhenSortDataAccordingToAverages_ShouldReturnSecondTopAverageBatsMen() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            cricketAnalyser.loadIPL2019Data(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
-            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToBattingAverages(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToBattingAverages();
             IPL2019MostRunsCSV[] iplCSV = new Gson().fromJson(sortedMostRunsData, IPL2019MostRunsCSV[].class);
             Assert.assertEquals("David Warner",iplCSV[2].player);
         } catch (CricketAnalyserException e){ }
     }
 
+    @Test
+    public void givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRates_ShouldReturnTopAverageBatsMen() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_WRONG_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToStrikeRates();
+            IPL2019MostRunsCSV[] iplCSV = new Gson().fromJson(sortedMostRunsData, IPL2019MostRunsCSV[].class);
+            Assert.assertEquals("Ishant Sharma",iplCSV[1].player);
+        } catch (CricketAnalyserException e){ }
+    }
+
+
+    @Test
+    public void givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRates_ShouldReturnSecondTopAverageBatsMen() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadIPLData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedIPLDataAccordingToStrikeRates();
+            IPL2019MostRunsCSV[] iplCSV = new Gson().fromJson(sortedMostRunsData, IPL2019MostRunsCSV[].class);
+            Assert.assertEquals("Andre Russell",iplCSV[2].player);
+        } catch (CricketAnalyserException e){ }
+    }
 }

@@ -17,7 +17,7 @@ public class IPL2019MostRunsCSV {
     public int innings;
 
     @CsvBindByName(column = "NO",required = true)
-    public double notOuts;
+    public int notOuts;
 
     @CsvBindByName(column = "Runs",required = true)
     public int runs;
@@ -46,7 +46,7 @@ public class IPL2019MostRunsCSV {
     @CsvBindByName(column = "50",required = true)
     public int fifties;
 
-    public IPL2019MostRunsCSV(String player, double average) {
+    public IPL2019MostRunsCSV(String player, double v, double average) {
         this.average = average;
         this.player = player;
     }
