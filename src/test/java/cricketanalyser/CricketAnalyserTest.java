@@ -4,8 +4,6 @@ import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Map;
-
 public class CricketAnalyserTest {
 
     private static final String IPL2019_MOST_RUNS_CSV_FILE_PATH = "./src/test/java/resources/IPL2019FactsheetMostRuns.csv";
@@ -18,7 +16,7 @@ public class CricketAnalyserTest {
     public void givenIPL2019MostRunsCSVFile_ReturnsCorrectRecords() {
         try {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
-            Map<String, CricketDataDAO> numOfPlayers = cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            int numOfPlayers = cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
             Assert.assertEquals(100, numOfPlayers);
         } catch (CricketAnalyserException cricketAnalyserException) { }
     }
