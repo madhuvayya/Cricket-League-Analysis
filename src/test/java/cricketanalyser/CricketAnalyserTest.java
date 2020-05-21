@@ -178,8 +178,8 @@ public class CricketAnalyserTest {
             cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
             String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToBestStrikeRateWithSixesAndFours();
             IPLMostRunsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostRunsCSV[].class);
-            Assert.assertNotEquals("MS DHoni", sorted[0].player);
-            Assert.assertNotEquals("Ishant Sharma", sorted[99].player);
+            Assert.assertNotEquals("MS DHoni", sorted[sorted.length-1].player);
+            Assert.assertNotEquals("Ishant Sharma", sorted[0].player);
         } catch (CricketAnalyserException e) { }
     }
 
@@ -190,9 +190,20 @@ public class CricketAnalyserTest {
             cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
             String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToGreatAveragesBestStrikeRates();
             IPLMostRunsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostRunsCSV[].class);
-            Assert.assertEquals("MS Dhoni", sorted[0].player);
-            Assert.assertEquals("Tim Southee", sorted[99].player);
+            Assert.assertEquals("MS Dhoni", sorted[sorted.length-1].player);
+            Assert.assertEquals("Tim Southee", sorted[0].player);
         } catch (CricketAnalyserException e) { }
     }
 
+    @Test
+    public void givenIPL2019MostRunsData_WhenSortAccordingToRunsAndAverages_ShouldReturnPlayers() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadCricketData(IPL2019_MOST_RUNS_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToRunsAndAverages();
+            IPLMostRunsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostRunsCSV[].class);
+            Assert.assertEquals("David Warner ", sorted[sorted.length-1].player);
+            Assert.assertEquals("Tim Southee", sorted[0].player);
+        } catch (CricketAnalyserException e) { }
+    }
 }
