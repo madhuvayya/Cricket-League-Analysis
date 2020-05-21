@@ -70,6 +70,12 @@ public class CricketAnalyser {
         return this.sort(compareByFourWickets);
     }
 
+    public String getSortedCricketDataAccordingToAveragesAndStrikeRates() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> compareByAverages = Comparator.comparing(iplData -> iplData.average);
+        Comparator<CricketDataDAO> compareByStrikeRate = compareByAverages.thenComparing(iplData -> iplData.strikeRate);
+        return this.sort(compareByStrikeRate);
+    }
+
     private String sort(Comparator<CricketDataDAO> cricketLeagueCSV) throws CricketAnalyserException {
         if(cricketDataMap==null || cricketDataMap.size()==0){
             throw new CricketAnalyserException("No League Data",
