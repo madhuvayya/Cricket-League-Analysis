@@ -42,6 +42,12 @@ public class CricketAnalyser {
         return this.sort(compareByFours);
     }
 
+    public String getSortedCricketDataAccordingToGreatAveragesBestStrikeRates() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> compareByAverages = Comparator.comparing(iplData -> iplData.average);
+        Comparator<CricketDataDAO> compareByStrikeRates = compareByAverages.thenComparing(iplData -> iplData.sixes);
+        return this.sort(compareByStrikeRates);
+    }
+
     private String sort(Comparator cricketLeagueCSV) throws CricketAnalyserException {
         if(cricketDataMap==null || cricketDataMap.size()==0){
             throw new CricketAnalyserException("No League Data",
@@ -53,4 +59,6 @@ public class CricketAnalyser {
             String sortedDataInJson=new Gson().toJson(sortedData);
             return sortedDataInJson;
     }
+
+
 }
