@@ -2,7 +2,7 @@ package cricketanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IPL2019MostWktsCSV {
+public class IPLMostWicketsCSV {
 
     @CsvBindByName(column = "POS",required = true)
     public int POS;
@@ -43,7 +43,7 @@ public class IPL2019MostWktsCSV {
     @CsvBindByName(column = "5w",required = true)
     public int fiveWickets;
 
-    public IPL2019MostWktsCSV(int POS, String player, int mat, int innings, double overs, int runs, int wickets, int bbi, double average, double economy, double srikeRate, int fourWickets, int fiveWickets) {
+    public IPLMostWicketsCSV(int POS, String player, int mat, int innings, double overs, int runs, int wickets, int bbi, double average, double economy, double srikeRate, int fourWickets, int fiveWickets) {
         this.POS = POS;
         this.player = player;
         this.mat = mat;

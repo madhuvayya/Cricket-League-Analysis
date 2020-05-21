@@ -18,31 +18,31 @@ public class CricketDataDAO {
     public int fours;
     public int sixes;
 
-    public CricketDataDAO(IPLMostRunsCSV ipl2019MostRunsCSV) {
-        this.player = ipl2019MostRunsCSV.player;
-        this.matches = ipl2019MostRunsCSV.matches;
-        this.innings = ipl2019MostRunsCSV.innings;
-        this.notOuts = ipl2019MostRunsCSV.notOuts;
-        this.runs = ipl2019MostRunsCSV.runs;
-        this.highScore = ipl2019MostRunsCSV.highScore;
-        this.average = ipl2019MostRunsCSV.average;
-        this.ballsFaced = ipl2019MostRunsCSV.ballsFaced;
-        this.strikeRate = ipl2019MostRunsCSV.strikeRate;
-        this.hundreds = ipl2019MostRunsCSV.hundreds;
-        this.fifties = ipl2019MostRunsCSV.fifties;
-        this.fours = ipl2019MostRunsCSV.fours;
-        this.sixes = ipl2019MostRunsCSV.sixes;
+    public CricketDataDAO(IPLMostRunsCSV mostRunsCSV) {
+        this.player = mostRunsCSV.player;
+        this.matches = mostRunsCSV.matches;
+        this.innings = mostRunsCSV.innings;
+        this.notOuts = mostRunsCSV.notOuts;
+        this.runs = mostRunsCSV.runs;
+        this.highScore = mostRunsCSV.highScore;
+        this.average = mostRunsCSV.average;
+        this.ballsFaced = mostRunsCSV.ballsFaced;
+        this.strikeRate = mostRunsCSV.strikeRate;
+        this.hundreds = mostRunsCSV.hundreds;
+        this.fifties = mostRunsCSV.fifties;
+        this.fours = mostRunsCSV.fours;
+        this.sixes = mostRunsCSV.sixes;
     }
 
-    public CricketDataDAO(IPL2019MostWktsCSV ipl2019MostWktsCSV) {
-        this.player = ipl2019MostWktsCSV.player;
-        this.matches = ipl2019MostWktsCSV.mat;
-        this.innings = ipl2019MostWktsCSV.innings;
-        this.runs = ipl2019MostWktsCSV.runs;
-        this.average = ipl2019MostWktsCSV.average;
-        this.strikeRate = ipl2019MostWktsCSV.strikeRate;
-        this.fourWickets = ipl2019MostWktsCSV.fourWickets;
-        this.fiveWickets = ipl2019MostWktsCSV.fiveWickets;
+    public CricketDataDAO(IPLMostWicketsCSV mostWicketsCSV) {
+        this.player = mostWicketsCSV.player;
+        this.matches = mostWicketsCSV.mat;
+        this.innings = mostWicketsCSV.innings;
+        this.runs = mostWicketsCSV.runs;
+        this.average = mostWicketsCSV.average;
+        this.strikeRate = mostWicketsCSV.strikeRate;
+        this.fourWickets = mostWicketsCSV.fourWickets;
+        this.fiveWickets = mostWicketsCSV.fiveWickets;
     }
 
     public CricketDataDAO() {

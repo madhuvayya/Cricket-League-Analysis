@@ -11,11 +11,11 @@ public class CricketAnalyser {
 
     public  int loadCricketData(String csvFilePath) throws CricketAnalyserException {
         CricketDataLoader cricketDataLoader = new CricketDataLoader();
-        Map<String, CricketDataDAO> cricketDataMap = cricketDataLoader.loadCricketData(csvFilePath);
+        Map<String, CricketDataDAO> cricketDataMap = cricketDataLoader.loadBatsMenData(csvFilePath);
         return cricketDataMap.size();
     }
 
-    public String getSortedCricketDataAccordingToBattingAverages() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToAverages() throws CricketAnalyserException {
         Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.average);
         return sort(iplCSVComparator);
     }
@@ -54,16 +54,15 @@ public class CricketAnalyser {
         return this.sort(compareByRunsWithAverage);
     }
 
-    private String sort(Comparator cricketLeagueCSV) throws CricketAnalyserException {
+    private String sort(Comparator<CricketDataDAO> cricketLeagueCSV) throws CricketAnalyserException {
         if(cricketDataMap==null || cricketDataMap.size()==0){
             throw new CricketAnalyserException("No League Data",
                     CricketAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
-            }
-            List sortedData= (List) cricketDataMap.values().stream()
+        }
+        List sortedData= (List) cricketDataMap.values().stream()
                                          .sorted(cricketLeagueCSV)
                                          .collect(Collectors.toList());
-            String sortedDataInJson=new Gson().toJson(sortedData);
-            return sortedDataInJson;
+        return new Gson().toJson(sortedData);
     }
 
 }
