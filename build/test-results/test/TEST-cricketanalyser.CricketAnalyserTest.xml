@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cricketanalyser.CricketAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-20T05:42:43" hostname="MADHU" time="0.008">
+<testsuite name="cricketanalyser.CricketAnalyserTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2020-05-21T03:33:23" hostname="MADHU" time="0.023">
   <properties/>
-  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToFoursAndSixes_ShouldReturnBatsMenWhoHittedMaximum" classname="cricketanalyser.CricketAnalyserTest" time="0.008"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToFours_ShouldNotMatch" classname="cricketanalyser.CricketAnalyserTest" time="0.007"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToSixes_ShouldNotMatch" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WithIncorrectHeader_ShouldThrowException" classname="cricketanalyser.CricketAnalyserTest" time="0.002"/>
+  <testcase name="givenIPL2019MostRunsData_WithIncorrectDelimiter_ShouldThrowException" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToSixes_ShouldReturnBatsManWithMoreSixes" classname="cricketanalyser.CricketAnalyserTest" time="0.001"/>
+  <testcase name="givenIPL2019MostRunsData_WithWrongFileType_ShouldThrowException" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsCSVFile_ReturnsInorrectRecords" classname="cricketanalyser.CricketAnalyserTest" time="0.001"/>
+  <testcase name="givenIPL2019MostRunsData_WithWrongFilePath_ShouldThrowException" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToAverages_ShouldReturnSecondTopAverageBatsMen" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRateWithMaximumFoursAndSixes_ShouldNotMatch" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToFours_ShouldReturnBatsManWithMoreFours" classname="cricketanalyser.CricketAnalyserTest" time="0.001"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToAverages_ShouldReturnTopAverageBatsMen" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRates_ShouldReturnSecondTopStrikeRateBatsMan" classname="cricketanalyser.CricketAnalyserTest" time="0.001"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRateWithMaximumFoursAndSixes_ShouldReturnPlayer" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsCSVFile_ReturnsCorrectRecords" classname="cricketanalyser.CricketAnalyserTest" time="0.0"/>
+  <testcase name="givenIPL2019MostRunsData_WhenSortDataAccordingToStrikeRates_ShouldReturnTopAverageBatsMen" classname="cricketanalyser.CricketAnalyserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

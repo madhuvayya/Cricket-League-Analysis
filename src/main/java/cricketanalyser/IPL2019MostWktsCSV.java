@@ -8,34 +8,34 @@ public class IPL2019MostWktsCSV {
     public int POS;
 
     @CsvBindByName(column = "PLAYER",required = true)
-    public String PLAYER;
+    public String player;
 
     @CsvBindByName(column = "Mat",required = true)
-    public int Mat;
+    public int mat;
 
     @CsvBindByName(column = "Inns",required = true)
-    public int Inns;
+    public int innings;
 
     @CsvBindByName(column = "Ov",required = true)
-    public double Ov;
+    public double overs;
 
     @CsvBindByName(column = "Runs",required = true)
-    public int Runs;
+    public int runs;
 
     @CsvBindByName(column = "Wkts",required = true)
-    public int Wkts;
+    public int wickets;
 
     @CsvBindByName(column = "BBI",required = true)
-    public int BBI;
+    public int bbi;
 
     @CsvBindByName(column = "Avg",required = true)
-    public double Avg;
+    public double average;
 
     @CsvBindByName(column = "Econ",required = true)
-    public double Econ;
+    public double economy;
 
     @CsvBindByName(column = "SR",required = true)
-    public double SR;
+    public double strikeRate;
 
     @CsvBindByName(column = "4w",required = true)
     public int fourWickets;
@@ -43,22 +43,19 @@ public class IPL2019MostWktsCSV {
     @CsvBindByName(column = "5w",required = true)
     public int fiveWickets;
 
-    @Override
-    public String toString() {
-        return "IPL2019MostWktsCSV{" +
-                "POS=" + POS +
-                ", PLAYER='" + PLAYER + '\'' +
-                ", Mat=" + Mat +
-                ", Inns=" + Inns +
-                ", Ov=" + Ov +
-                ", Runs=" + Runs +
-                ", Wkts=" + Wkts +
-                ", BBI=" + BBI +
-                ", Avg=" + Avg +
-                ", Econ=" + Econ +
-                ", SR=" + SR +
-                ", fourWickets=" + fourWickets +
-                ", fiveWickets=" + fiveWickets +
-                '}';
+    public IPL2019MostWktsCSV(int POS, String player, int mat, int innings, double overs, int runs, int wickets, int bbi, double average, double economy, double srikeRate, int fourWickets, int fiveWickets) {
+        this.POS = POS;
+        this.player = player;
+        this.mat = mat;
+        this.innings = innings;
+        this.overs = overs;
+        this.runs = runs;
+        this.wickets = wickets;
+        this.bbi = bbi;
+        this.average = average;
+        this.economy = economy;
+        this.strikeRate = srikeRate;
+        this.fourWickets = fourWickets;
+        this.fiveWickets = fiveWickets;
     }
 }

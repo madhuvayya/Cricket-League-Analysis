@@ -3,7 +3,9 @@ package cricketanalyser;
 public class CricketAnalyserException extends Exception {
 
     enum ExceptionType {
-        IPL_FILE_PROBLEM,
+        CSV_FILE_PROBLEM,
+        NOT_ABLE_TO_PARSE,
+        DATA_NOT_APPROPRIATE,
         NO_CENSUS_DATA
     }
 

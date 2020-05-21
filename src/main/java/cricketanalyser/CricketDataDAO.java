@@ -2,6 +2,8 @@ package cricketanalyser;
 
 public class CricketDataDAO {
 
+    public int fiveWickets;
+    public int fourWickets;
     public String player;
     public int matches;
     public int innings;
@@ -16,23 +18,33 @@ public class CricketDataDAO {
     public int fours;
     public int sixes;
 
-    public CricketDataDAO(IPL2019MostRunsCSV ipl2019MostRunsCSV) {
-        player = ipl2019MostRunsCSV.player;
-        matches = ipl2019MostRunsCSV.matches;
-        innings = ipl2019MostRunsCSV.innings;
-        notOuts = ipl2019MostRunsCSV.notOuts;
-        runs = ipl2019MostRunsCSV.runs;
-        highScore = ipl2019MostRunsCSV.highScore;
-        average = ipl2019MostRunsCSV.average;
-        ballsFaced = ipl2019MostRunsCSV.ballsFaced;
-        strikeRate = ipl2019MostRunsCSV.strikeRate;
-        hundreds = ipl2019MostRunsCSV.hundreds;
-        fifties = ipl2019MostRunsCSV.fifties;
-        fours = ipl2019MostRunsCSV.fours;
-        sixes = ipl2019MostRunsCSV.sixes;
+    public CricketDataDAO(IPLMostRunsCSV ipl2019MostRunsCSV) {
+        this.player = ipl2019MostRunsCSV.player;
+        this.matches = ipl2019MostRunsCSV.matches;
+        this.innings = ipl2019MostRunsCSV.innings;
+        this.notOuts = ipl2019MostRunsCSV.notOuts;
+        this.runs = ipl2019MostRunsCSV.runs;
+        this.highScore = ipl2019MostRunsCSV.highScore;
+        this.average = ipl2019MostRunsCSV.average;
+        this.ballsFaced = ipl2019MostRunsCSV.ballsFaced;
+        this.strikeRate = ipl2019MostRunsCSV.strikeRate;
+        this.hundreds = ipl2019MostRunsCSV.hundreds;
+        this.fifties = ipl2019MostRunsCSV.fifties;
+        this.fours = ipl2019MostRunsCSV.fours;
+        this.sixes = ipl2019MostRunsCSV.sixes;
     }
 
-    public IPL2019MostRunsCSV getCricketDataDTO() {
-        return new IPL2019MostRunsCSV(player, (double) average, (double) strikeRate);
+    public CricketDataDAO(IPL2019MostWktsCSV ipl2019MostWktsCSV) {
+        this.player = ipl2019MostWktsCSV.player;
+        this.matches = ipl2019MostWktsCSV.mat;
+        this.innings = ipl2019MostWktsCSV.innings;
+        this.runs = ipl2019MostWktsCSV.runs;
+        this.average = ipl2019MostWktsCSV.average;
+        this.strikeRate = ipl2019MostWktsCSV.strikeRate;
+        this.fourWickets = ipl2019MostWktsCSV.fourWickets;
+        this.fiveWickets = ipl2019MostWktsCSV.fiveWickets;
+    }
+
+    public CricketDataDAO() {
     }
 }
