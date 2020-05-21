@@ -243,4 +243,16 @@ public class CricketAnalyserTest {
             Assert.assertEquals("Ben Cutting", sorted[0].player);
         } catch (CricketAnalyserException e) { }
     }
+
+    @Test
+    public void givenIPL2019MostWicketsData_WhenSortAccordingToStrikeRateWithFiveAndFourWickets_ShouldReturnTopPlayers() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadCricketData(CricketAnalyser.CricketData.BOWLERS,IPL2019_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToStrikeRateWithFiveAndFourWickets();
+            IPLMostWicketsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostWicketsCSV[].class);
+            Assert.assertEquals("Lasith Malinga", sorted[0].player);
+            Assert.assertEquals("Yusuf Pathan", sorted[98].player);
+        } catch (CricketAnalyserException e) { }
+    }
 }
