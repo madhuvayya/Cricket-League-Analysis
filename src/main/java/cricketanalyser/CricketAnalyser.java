@@ -58,6 +58,11 @@ public class CricketAnalyser {
         return this.sort(compareByRunsWithAverage);
     }
 
+    public String getSortedCricketDataAccordingToEconomy() throws CricketAnalyserException {
+        Comparator<CricketDataDAO> compareByEconomy = Comparator.comparing(iplData -> iplData.economy);
+        return this.sort(compareByEconomy);
+    }
+
     private String sort(Comparator<CricketDataDAO> cricketLeagueCSV) throws CricketAnalyserException {
         if(cricketDataMap==null || cricketDataMap.size()==0){
             throw new CricketAnalyserException("No League Data",

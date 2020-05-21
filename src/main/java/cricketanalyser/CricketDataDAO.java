@@ -17,6 +17,7 @@ public class CricketDataDAO {
     public int fifties;
     public int fours;
     public int sixes;
+    public double economy;
 
     public CricketDataDAO(IPLMostRunsCSV mostRunsCSV) {
         this.player = mostRunsCSV.player;
@@ -39,6 +40,7 @@ public class CricketDataDAO {
         this.matches = mostWicketsCSV.mat;
         this.innings = mostWicketsCSV.innings;
         this.runs = mostWicketsCSV.runs;
+        this.economy = mostWicketsCSV.economy;
         this.average = mostWicketsCSV.average;
         this.strikeRate = mostWicketsCSV.strikeRate;
         this.fourWickets = mostWicketsCSV.fourWickets;

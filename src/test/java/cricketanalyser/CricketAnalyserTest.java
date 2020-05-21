@@ -214,7 +214,7 @@ public class CricketAnalyserTest {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
             cricketAnalyser.loadCricketData(CricketAnalyser.CricketData.BOWLERS,IPL2019_MOST_WICKETS_CSV_FILE_PATH);
             String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToAverages();
-            IPLMostRunsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostRunsCSV[].class);
+            IPLMostWicketsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostWicketsCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham", sorted[sorted.length-1].player);
             Assert.assertEquals("Yusuf Pathan", sorted[2].player);
         } catch (CricketAnalyserException e) { }
@@ -226,9 +226,21 @@ public class CricketAnalyserTest {
             CricketAnalyser cricketAnalyser = new CricketAnalyser();
             cricketAnalyser.loadCricketData(CricketAnalyser.CricketData.BOWLERS,IPL2019_MOST_WICKETS_CSV_FILE_PATH);
             String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToAverages();
-            IPLMostRunsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostRunsCSV[].class);
+            IPLMostWicketsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostWicketsCSV[].class);
             Assert.assertEquals("Alzarri Joseph", sorted[sorted.length-1].player);
             Assert.assertEquals("Liam Livingstone", sorted[0].player);
+        } catch (CricketAnalyserException e) { }
+    }
+
+    @Test
+    public void givenIPL2019MostWicketsData_WhenSortAccordingToEconomy_ShouldReturnTopPlayers() {
+        try {
+            CricketAnalyser cricketAnalyser = new CricketAnalyser();
+            cricketAnalyser.loadCricketData(CricketAnalyser.CricketData.BOWLERS,IPL2019_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedMostRunsData = cricketAnalyser.getSortedCricketDataAccordingToEconomy();
+            IPLMostWicketsCSV[] sorted = new Gson().fromJson(sortedMostRunsData, IPLMostWicketsCSV[].class);
+            Assert.assertEquals("Shivam Dube", sorted[sorted.length-1].player);
+            Assert.assertEquals("Ben Cutting", sorted[0].player);
         } catch (CricketAnalyserException e) { }
     }
 }
