@@ -7,11 +7,15 @@ import java.util.stream.Collectors;
 
 public class CricketAnalyser {
 
+    enum CricketData {
+        BATSMEN,BOWLERS
+    }
+
     Map<String, CricketDataDAO> cricketDataMap = null;
 
-    public  int loadCricketData(String csvFilePath) throws CricketAnalyserException {
+    public  int loadCricketData(CricketData data,String csvFilePath) throws CricketAnalyserException {
         CricketDataLoader cricketDataLoader = new CricketDataLoader();
-        Map<String, CricketDataDAO> cricketDataMap = cricketDataLoader.loadBatsMenData(csvFilePath);
+        Map<String, CricketDataDAO> cricketDataMap = cricketDataLoader.loadBatsMenData(data,csvFilePath);
         return cricketDataMap.size();
     }
 

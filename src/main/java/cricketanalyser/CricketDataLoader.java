@@ -16,13 +16,20 @@ public class CricketDataLoader {
 
     Map<String, CricketDataDAO> cricketDataMap = null;
 
-    public Map<String, CricketDataDAO> loadBatsMenData(String csvFilePath) throws CricketAnalyserException {
+    public Map<String, CricketDataDAO> loadBatsMenData(CricketAnalyser.CricketData data,String csvFilePath) throws CricketAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostRunsCSV.class);
-            Iterable<IPLMostRunsCSV> csvIterable = () -> csvFileIterator;
-            StreamSupport.stream(csvIterable.spliterator(),false).
-                    forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player,new CricketDataDAO(iplDataCsv)));
+            if(CricketAnalyser.CricketData.BATSMEN.equals(data)) {
+                Iterator<IPLMostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostRunsCSV.class);
+                Iterable<IPLMostRunsCSV> csvIterable = () -> csvFileIterator;
+                StreamSupport.stream(csvIterable.spliterator(), false).
+                        forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
+            } else{
+                Iterator<IPLMostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostRunsCSV.class);
+                Iterable<IPLMostRunsCSV> csvIterable = () -> csvFileIterator;
+                StreamSupport.stream(csvIterable.spliterator(), false).
+                        forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
+            }
             return cricketDataMap;
         } catch (IOException ioException) {
             throw new CricketAnalyserException(ioException.getMessage(),
@@ -35,25 +42,4 @@ public class CricketDataLoader {
                     CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
         }
     }
-
-    public Map<String, CricketDataDAO> loadCricketData(String csvFilePath) throws CricketAnalyserException {
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
-            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            Iterator<IPLMostWicketsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostWicketsCSV.class);
-            Iterable<IPLMostWicketsCSV> csvIterable = () -> csvFileIterator;
-            StreamSupport.stream(csvIterable.spliterator(),false).
-                    forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player,new CricketDataDAO(iplDataCsv)));
-            return cricketDataMap;
-        } catch (IOException ioException) {
-            throw new CricketAnalyserException(ioException.getMessage(),
-                    CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
-        } catch (CSVBuilderException csvBuilderException) {
-            throw new CricketAnalyserException(csvBuilderException.getMessage(),
-                    CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
-        } catch (RuntimeException runtimeException) {
-            throw new CricketAnalyserException(runtimeException.getMessage(),
-                    CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
-        }
-    }
-
 }
