@@ -2,21 +2,21 @@ package cricketanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IPLMostWicketsCSV {
+public class Bowlers {
 
-    @CsvBindByName(column = "POS",required = true)
+    @CsvBindByName(column = "POS")
     public int POS;
 
     @CsvBindByName(column = "PLAYER",required = true)
     public String player;
 
-    @CsvBindByName(column = "Mat",required = true)
+    @CsvBindByName(column = "Mat")
     public int mat;
 
-    @CsvBindByName(column = "Inns",required = true)
+    @CsvBindByName(column = "Inns")
     public int innings;
 
-    @CsvBindByName(column = "Ov",required = true)
+    @CsvBindByName(column = "Ov")
     public double overs;
 
     @CsvBindByName(column = "Runs",required = true)
@@ -25,7 +25,7 @@ public class IPLMostWicketsCSV {
     @CsvBindByName(column = "Wkts",required = true)
     public int wickets;
 
-    @CsvBindByName(column = "BBI",required = true)
+    @CsvBindByName(column = "BBI")
     public int bbi;
 
     @CsvBindByName(column = "Avg",required = true)
@@ -43,18 +43,14 @@ public class IPLMostWicketsCSV {
     @CsvBindByName(column = "5w",required = true)
     public int fiveWickets;
 
-    public IPLMostWicketsCSV(int POS, String player, int mat, int innings, double overs, int runs, int wickets, int bbi, double average, double economy, double srikeRate, int fourWickets, int fiveWickets) {
-        this.POS = POS;
+    public Bowlers(String player, int runs, int wickets, double average, double economy, double strikeRate,
+                   int fourWickets, int fiveWickets) {
         this.player = player;
-        this.mat = mat;
-        this.innings = innings;
-        this.overs = overs;
         this.runs = runs;
         this.wickets = wickets;
-        this.bbi = bbi;
         this.average = average;
         this.economy = economy;
-        this.strikeRate = srikeRate;
+        this.strikeRate = strikeRate;
         this.fourWickets = fourWickets;
         this.fiveWickets = fiveWickets;
     }

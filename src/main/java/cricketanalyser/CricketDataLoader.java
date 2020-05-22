@@ -20,25 +20,19 @@ public class CricketDataLoader {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             if(CricketAnalyser.CricketData.BATSMEN.equals(data)) {
-                Iterator<IPLMostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostRunsCSV.class);
-                Iterable<IPLMostRunsCSV> csvIterable = () -> csvFileIterator;
+                Iterator<BatsMen> csvFileIterator = csvBuilder.getCSVFileIterator(reader, BatsMen.class);
+                Iterable<BatsMen> csvIterable = () -> csvFileIterator;
                 StreamSupport.stream(csvIterable.spliterator(), false).
                         forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
             } else{
-                Iterator<IPLMostRunsCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IPLMostRunsCSV.class);
-                Iterable<IPLMostRunsCSV> csvIterable = () -> csvFileIterator;
+                Iterator<Bowlers> csvFileIterator = csvBuilder.getCSVFileIterator(reader, Bowlers.class);
+                Iterable<Bowlers> csvIterable = () -> csvFileIterator;
                 StreamSupport.stream(csvIterable.spliterator(), false).
                         forEach(iplDataCsv -> cricketDataMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
             }
             return cricketDataMap;
-        } catch (IOException ioException) {
+        } catch (IOException | CSVBuilderException | RuntimeException ioException) {
             throw new CricketAnalyserException(ioException.getMessage(),
-                    CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
-        } catch (CSVBuilderException csvBuilderException) {
-            throw new CricketAnalyserException(csvBuilderException.getMessage(),
-                    CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
-        } catch (RuntimeException runtimeException) {
-            throw new CricketAnalyserException(runtimeException.getMessage(),
                     CricketAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
         }
     }

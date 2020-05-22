@@ -19,77 +19,79 @@ public class CricketAnalyser {
         return cricketDataMap.size();
     }
 
-    public String getSortedCricketDataAccordingToAverages() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToAverages(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.average);
-        return sort(iplCSVComparator);
+        return sort(iplCSVComparator,data);
     }
 
-    public String getSortedCricketDataAccordingToStrikeRates() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToStrikeRates(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.strikeRate);
-        return sort(iplCSVComparator);
+        return sort(iplCSVComparator,data);
     }
 
-    public String getSortedCricketDataAccordingToFours() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToFours(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.fours);
-        return sort(iplCSVComparator);
+        return sort(iplCSVComparator,data);
     }
 
-    public String getSortedCricketDataAccordingToSixes() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToSixes(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.sixes);
-        return sort(iplCSVComparator);
+        return sort(iplCSVComparator,data);
     }
 
-    public String getSortedCricketDataAccordingToBestStrikeRateWithSixesAndFours() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToBestStrikeRateWithSixesAndFours(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByStrikeRate = Comparator.comparing(iplData -> iplData.strikeRate);
         Comparator<CricketDataDAO> compareBySixes = compareByStrikeRate.thenComparing(iplData -> iplData.sixes);
         Comparator<CricketDataDAO> compareByFours = compareBySixes.thenComparing(iplData -> iplData.fours);
-        return this.sort(compareByFours);
+        return this.sort(compareByFours,data);
     }
 
-    public String getSortedCricketDataAccordingToGreatAveragesBestStrikeRates() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToGreatAveragesBestStrikeRates(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByAverages = Comparator.comparing(iplData -> iplData.average);
         Comparator<CricketDataDAO> compareByStrikeRates = compareByAverages.thenComparing(iplData -> iplData.sixes);
-        return this.sort(compareByStrikeRates);
+        return this.sort(compareByStrikeRates,data);
     }
 
-    public String getSortedCricketDataAccordingToRunsAndAverages() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToRunsAndAverages(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByRuns = Comparator.comparing(iplData -> iplData.runs);
         Comparator<CricketDataDAO> compareByRunsWithAverage = compareByRuns.thenComparing(iplData -> iplData.average);
-        return this.sort(compareByRunsWithAverage);
+        return this.sort(compareByRunsWithAverage,data);
     }
 
-    public String getSortedCricketDataAccordingToEconomy() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToEconomy(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByEconomy = Comparator.comparing(iplData -> iplData.economy);
-        return this.sort(compareByEconomy);
+        return this.sort(compareByEconomy,data);
     }
 
-    public String getSortedCricketDataAccordingToStrikeRateWithFiveAndFourWickets() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToStrikeRateWithFiveAndFourWickets(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByStrikeRate = Comparator.comparing(iplData -> iplData.strikeRate);
         Comparator<CricketDataDAO> compareByFiveWickets = compareByStrikeRate.thenComparing(iplData -> iplData.sixes);
         Comparator<CricketDataDAO> compareByFourWickets = compareByFiveWickets.thenComparing(iplData -> iplData.fours);
-        return this.sort(compareByFourWickets);
+        return this.sort(compareByFourWickets,data);
     }
 
-    public String getSortedCricketDataAccordingToAveragesAndStrikeRates() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToAveragesAndStrikeRates(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByAverages = Comparator.comparing(iplData -> iplData.average);
         Comparator<CricketDataDAO> compareByStrikeRate = compareByAverages.thenComparing(iplData -> iplData.strikeRate);
-        return this.sort(compareByStrikeRate);
+        return this.sort(compareByStrikeRate,data);
     }
 
-    public String getSortedCricketDataAccordingToWicketsAndAverages() throws CricketAnalyserException {
+    public String getSortedCricketDataAccordingToWicketsAndAverages(CricketData data) throws CricketAnalyserException {
         Comparator<CricketDataDAO> compareByWickets = Comparator.comparing(iplData -> iplData.wickets);
         Comparator<CricketDataDAO> compareByAverages = compareByWickets.thenComparing(iplData -> iplData.average);
-        return this.sort(compareByAverages);
+        return this.sort(compareByAverages,data);
     }
 
-    private String sort(Comparator<CricketDataDAO> cricketLeagueCSV) throws CricketAnalyserException {
+    private String sort(Comparator<CricketDataDAO> cricketLeagueCSV,CricketData data) throws CricketAnalyserException {
         if(cricketDataMap==null || cricketDataMap.size()==0){
             throw new CricketAnalyserException("No League Data",
                     CricketAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
         }
-        List sortedData= (List) cricketDataMap.values().stream()
-                                         .sorted(cricketLeagueCSV)
-                                         .collect(Collectors.toList());
+        List sortedData= cricketDataMap.values()
+                                                .stream()
+                                                .sorted(cricketLeagueCSV)
+                                                .map(cricketDataDAO -> cricketDataDAO.getCensusDTO(data))
+                                                .collect(Collectors.toList());
         return new Gson().toJson(sortedData);
     }
 

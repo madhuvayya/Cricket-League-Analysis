@@ -20,7 +20,7 @@ public class CricketDataDAO {
     public double economy;
     public int wickets;
 
-    public CricketDataDAO(IPLMostRunsCSV mostRunsCSV) {
+    public CricketDataDAO(BatsMen mostRunsCSV) {
         this.player = mostRunsCSV.player;
         this.matches = mostRunsCSV.matches;
         this.innings = mostRunsCSV.innings;
@@ -36,7 +36,7 @@ public class CricketDataDAO {
         this.sixes = mostRunsCSV.sixes;
     }
 
-    public CricketDataDAO(IPLMostWicketsCSV mostWicketsCSV) {
+    public CricketDataDAO(Bowlers mostWicketsCSV) {
         this.player = mostWicketsCSV.player;
         this.matches = mostWicketsCSV.mat;
         this.innings = mostWicketsCSV.innings;
@@ -48,6 +48,9 @@ public class CricketDataDAO {
         this.fiveWickets = mostWicketsCSV.fiveWickets;
     }
 
-    public CricketDataDAO() {
+    public Object getCensusDTO(CricketAnalyser.CricketData data) {
+        if(data.equals(CricketAnalyser.CricketData.BATSMEN))
+            return new BatsMen(player,runs,average,strikeRate,fours,sixes);
+        return new Bowlers(player,runs,wickets,average,economy,strikeRate,fourWickets,fiveWickets);
     }
 }
