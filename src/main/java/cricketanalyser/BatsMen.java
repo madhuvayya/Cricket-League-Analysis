@@ -29,10 +29,10 @@ public class BatsMen {
     public int ballsFaced;
 
     @CsvBindByName(column = "Avg",required = true)
-    public double average;
+    public double battingAverage;
 
     @CsvBindByName(column = "SR",required = true)
-    public double strikeRate;
+    public double battingStrikeRate;
 
     @CsvBindByName(column = "4s",required = true)
     public int fours;
@@ -46,12 +46,16 @@ public class BatsMen {
     @CsvBindByName(column = "50")
     public int fifties;
 
-    public BatsMen(String player, int runs, double average, double strikeRate, int fours, int sixes) {
+    public BatsMen() {
+    }
+
+    public BatsMen(String player, int runs, double battingAverage, double battingStrikeRate, int fours, int sixes) {
         this.player = player;
         this.runs = runs;
-        this.average = average;
-        this.strikeRate = strikeRate;
+        this.battingAverage = battingAverage;
+        this.battingStrikeRate = battingStrikeRate;
         this.fours = fours;
         this.sixes = sixes;
     }
+
 }

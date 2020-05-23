@@ -19,7 +19,7 @@ public class Bowlers {
     @CsvBindByName(column = "Ov")
     public double overs;
 
-    @CsvBindByName(column = "Runs",required = true)
+    @CsvBindByName(column = "Runs")
     public int runs;
 
     @CsvBindByName(column = "Wkts",required = true)
@@ -29,13 +29,13 @@ public class Bowlers {
     public int bbi;
 
     @CsvBindByName(column = "Avg",required = true)
-    public double average;
+    public double bowlingAverage;
 
     @CsvBindByName(column = "Econ",required = true)
     public double economy;
 
     @CsvBindByName(column = "SR",required = true)
-    public double strikeRate;
+    public double bowlingStrikeRate;
 
     @CsvBindByName(column = "4w",required = true)
     public int fourWickets;
@@ -43,14 +43,16 @@ public class Bowlers {
     @CsvBindByName(column = "5w",required = true)
     public int fiveWickets;
 
-    public Bowlers(String player, int runs, int wickets, double average, double economy, double strikeRate,
+    public Bowlers() {
+    }
+
+    public Bowlers(String player, int wickets, double bowlingAverage, double economy, double bowlingStrikeRate,
                    int fourWickets, int fiveWickets) {
         this.player = player;
-        this.runs = runs;
         this.wickets = wickets;
-        this.average = average;
+        this.bowlingAverage = bowlingAverage;
         this.economy = economy;
-        this.strikeRate = strikeRate;
+        this.bowlingStrikeRate = bowlingStrikeRate;
         this.fourWickets = fourWickets;
         this.fiveWickets = fiveWickets;
     }

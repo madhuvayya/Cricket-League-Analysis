@@ -2,19 +2,15 @@ package cricketanalyser;
 
 public class CricketDataDAO {
 
+    public String player;
     public int fiveWickets;
     public int fourWickets;
-    public String player;
-    public int matches;
-    public int innings;
-    public int notOuts;
     public int runs;
     public int highScore;
-    public double average;
-    public int ballsFaced;
-    public double strikeRate;
-    public int hundreds;
-    public int fifties;
+    public double battingAverage;
+    public double bowlingAverage;
+    public double battingStrikeRate;
+    public double bowlingStrikeRate;
     public int fours;
     public int sixes;
     public double economy;
@@ -22,35 +18,30 @@ public class CricketDataDAO {
 
     public CricketDataDAO(BatsMen mostRunsCSV) {
         this.player = mostRunsCSV.player;
-        this.matches = mostRunsCSV.matches;
-        this.innings = mostRunsCSV.innings;
-        this.notOuts = mostRunsCSV.notOuts;
         this.runs = mostRunsCSV.runs;
         this.highScore = mostRunsCSV.highScore;
-        this.average = mostRunsCSV.average;
-        this.ballsFaced = mostRunsCSV.ballsFaced;
-        this.strikeRate = mostRunsCSV.strikeRate;
-        this.hundreds = mostRunsCSV.hundreds;
-        this.fifties = mostRunsCSV.fifties;
+        this.battingAverage = mostRunsCSV.battingAverage;
+        this.battingStrikeRate = mostRunsCSV.battingStrikeRate;
         this.fours = mostRunsCSV.fours;
         this.sixes = mostRunsCSV.sixes;
     }
 
     public CricketDataDAO(Bowlers mostWicketsCSV) {
         this.player = mostWicketsCSV.player;
-        this.matches = mostWicketsCSV.mat;
-        this.innings = mostWicketsCSV.innings;
         this.runs = mostWicketsCSV.runs;
         this.economy = mostWicketsCSV.economy;
-        this.average = mostWicketsCSV.average;
-        this.strikeRate = mostWicketsCSV.strikeRate;
+        this.bowlingAverage = mostWicketsCSV.bowlingAverage;
+        this.bowlingStrikeRate = mostWicketsCSV.bowlingStrikeRate;
         this.fourWickets = mostWicketsCSV.fourWickets;
         this.fiveWickets = mostWicketsCSV.fiveWickets;
     }
 
     public Object getCensusDTO(CricketAnalyser.CricketData data) {
         if(data.equals(CricketAnalyser.CricketData.BATSMEN))
-            return new BatsMen(player,runs,average,strikeRate,fours,sixes);
-        return new Bowlers(player,runs,wickets,average,economy,strikeRate,fourWickets,fiveWickets);
+            return new BatsMen(player,runs, battingAverage, battingStrikeRate,fours,sixes);
+        else if (data.equals(CricketAnalyser.CricketData.BATSMEN))
+            return new Bowlers(player,wickets, battingAverage,economy, battingStrikeRate,fourWickets,fiveWickets);
+        else
+            return new BatsMenBowlerCombination(player,fours,sixes,runs,battingAverage, bowlingAverage,battingStrikeRate);
     }
 }
