@@ -17,8 +17,7 @@ public class CricketAnalyser {
     Map<String,CricketDataDAO> cricketDataMap = null;
 
     public  int loadCricketData(CricketData data,String filePath) throws CricketAnalyserException {
-        CricketDataLoader cricketDataLoader = new CricketDataLoader();
-        cricketDataMap = cricketDataLoader.loadData(data,filePath);
+        cricketDataMap = new CricketDataLoaderFactory().getCricketData(data,filePath);
         return cricketDataMap.size();
     }
 

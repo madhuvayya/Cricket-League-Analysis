@@ -9,9 +9,10 @@ public class BatsMenBowlerCombination {
     public double battingAverage;
     public double bowlerAverage;
     public double battingStrikeRate;
+    public int wickets;
 
     public BatsMenBowlerCombination(String player, int four, int six, int runs, double battingAverage,
-                                    double bowlerAverage, double battingStrikeRate) {
+                                    double bowlerAverage, double battingStrikeRate,int wickets) {
         this.player = player;
         this.four = four;
         this.six = six;
@@ -19,5 +20,6 @@ public class BatsMenBowlerCombination {
         this.battingAverage = battingAverage;
         this.bowlerAverage = bowlerAverage;
         this.battingStrikeRate = battingStrikeRate;
+        this.wickets = wickets;
     }
 }
