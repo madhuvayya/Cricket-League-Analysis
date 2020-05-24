@@ -17,7 +17,7 @@ public abstract class CricketDataAdapter {
 
     Map<String, CricketDataDAO> iplAnalysisMap = new HashMap<>();
 
-    public abstract Map<String, CricketDataDAO> loadData(String csvFilePath) throws CricketAnalyserException;
+    public abstract Map<String, CricketDataDAO> loadData(String ...csvFilePath) throws CricketAnalyserException;
 
     public <E> Map<String,CricketDataDAO> getCricketData(Class<E> iplDataCsvClass, String csvFilePath)
                                                                 throws CricketAnalyserException {
