@@ -2,7 +2,7 @@ package cricketanalyser;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class BatsMen {
+public class BatsMenData {
 
     @CsvBindByName(column = "POS")
     public int POS;
@@ -46,10 +46,10 @@ public class BatsMen {
     @CsvBindByName(column = "50")
     public int fifties;
 
-    public BatsMen() {
+    public BatsMenData() {
     }
 
-    public BatsMen(String player, int runs, double battingAverage, double battingStrikeRate, int fours, int sixes) {
+    public BatsMenData(String player, int runs, double battingAverage, double battingStrikeRate, int fours, int sixes) {
         this.player = player;
         this.runs = runs;
         this.battingAverage = battingAverage;

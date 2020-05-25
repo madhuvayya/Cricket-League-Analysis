@@ -16,7 +16,7 @@ public class CricketDataDAO {
     public double economy;
     public int wickets;
 
-    public CricketDataDAO(BatsMen mostRunsCSV) {
+    public CricketDataDAO(BatsMenData mostRunsCSV) {
         this.player = mostRunsCSV.player;
         this.runs = mostRunsCSV.runs;
         this.highScore = mostRunsCSV.highScore;
@@ -26,9 +26,8 @@ public class CricketDataDAO {
         this.sixes = mostRunsCSV.sixes;
     }
 
-    public CricketDataDAO(Bowlers mostWicketsCSV) {
+    public CricketDataDAO(BowlersData mostWicketsCSV) {
         this.player = mostWicketsCSV.player;
-        this.runs = mostWicketsCSV.runs;
         this.economy = mostWicketsCSV.economy;
         this.bowlingAverage = mostWicketsCSV.bowlingAverage;
         this.bowlingStrikeRate = mostWicketsCSV.bowlingStrikeRate;
@@ -36,13 +35,13 @@ public class CricketDataDAO {
         this.fiveWickets = mostWicketsCSV.fiveWickets;
     }
 
-    public Object getCensusDTO(CricketAnalyser.CricketData data) {
+    public Object getCricketDataDTO(CricketAnalyser.CricketData data) {
         if(data.equals(CricketAnalyser.CricketData.BATSMEN))
-            return new BatsMen(player,runs, battingAverage, battingStrikeRate,fours,sixes);
+            return new BatsMenData(player,runs, battingAverage, battingStrikeRate,fours,sixes);
         else if (data.equals(CricketAnalyser.CricketData.BATSMEN))
-            return new Bowlers(player,wickets, battingAverage,economy, battingStrikeRate,fourWickets,fiveWickets);
+            return new BowlersData(player,wickets, battingAverage,economy, battingStrikeRate,fourWickets,fiveWickets);
         else
-            return new BatsMenBowlerCombination(player,fours,sixes,runs,battingAverage, bowlingAverage,battingStrikeRate
-                                                ,wickets);
+            return new BatsMenBowlerCombinationData(player,fours,sixes,runs,battingAverage, bowlingAverage,
+                                                    battingStrikeRate,wickets);
     }
 }

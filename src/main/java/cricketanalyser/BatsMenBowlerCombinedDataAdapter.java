@@ -9,8 +9,8 @@ public class BatsMenBowlerCombinedDataAdapter extends CricketDataAdapter{
     Map<String, CricketDataDAO> bowlersData = new HashMap<>();
 
     public Map<String, CricketDataDAO> loadData(String... csvFilePath) throws CricketAnalyserException {
-        batsmanData = super.getCricketData(BatsMen.class,csvFilePath[0]);
-        bowlersData = super.getCricketData(Bowlers.class,csvFilePath[1]);
+        batsmanData = super.getCricketData(BatsMenData.class,csvFilePath[0]);
+        bowlersData = super.getCricketData(BowlersData.class,csvFilePath[1]);
         bowlersData.values().stream()
                 .filter(iplData -> batsmanData.get(iplData.player) != null)
                 .forEach(iplData -> {

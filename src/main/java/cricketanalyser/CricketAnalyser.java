@@ -22,23 +22,23 @@ public class CricketAnalyser {
     }
 
     public String getSortedCricketDataAccordingToAverages(CricketData data) throws CricketAnalyserException {
-        Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.battingAverage);
-        return sortData(iplCSVComparator,data);
+        Comparator<CricketDataDAO> comparator =Comparator.comparing(sortBy->sortBy.battingAverage);
+        return sortData(comparator,data);
     }
 
     public String getSortedCricketDataAccordingToStrikeRates(CricketData data) throws CricketAnalyserException {
-        Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.battingStrikeRate);
-        return sortData(iplCSVComparator,data);
+        Comparator<CricketDataDAO> comparator =Comparator.comparing(sortBy->sortBy.battingStrikeRate);
+        return sortData(comparator,data);
     }
 
     public String getSortedCricketDataAccordingToFours(CricketData data) throws CricketAnalyserException {
-        Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.fours);
-        return sortData(iplCSVComparator,data);
+        Comparator<CricketDataDAO> comparator =Comparator.comparing(sortBy->sortBy.fours);
+        return sortData(comparator,data);
     }
 
     public String getSortedCricketDataAccordingToSixes(CricketData data) throws CricketAnalyserException {
-        Comparator<CricketDataDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.sixes);
-        return sortData(iplCSVComparator,data);
+        Comparator<CricketDataDAO> comparator =Comparator.comparing(sortBy->sortBy.sixes);
+        return sortData(comparator,data);
     }
 
     public String getSortedCricketDataAccordingToBestStrikeRateWithSixesAndFours(CricketData data) throws CricketAnalyserException {
@@ -104,7 +104,7 @@ public class CricketAnalyser {
         }
         List sortedData= cricketDataMap.values().stream()
                                                 .sorted(cricketCSV)
-                                                .map(cricketDataDAO -> cricketDataDAO.getCensusDTO(data))
+                                                .map(cricketDataDAO -> cricketDataDAO.getCricketDataDTO(data))
                                                 .collect(Collectors.toList());
         return new Gson().toJson(sortedData);
     }

@@ -25,13 +25,13 @@ public abstract class CricketDataAdapter {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<E> csvFileIterator = csvBuilder.getCSVFileIterator(reader, iplDataCsvClass);
             Iterable<E> csvIterable = () -> csvFileIterator;
-            if(iplDataCsvClass.getName().equals("cricketanalyser.BatsMen")) {
+            if(iplDataCsvClass.getName().equals("cricketanalyser.BatsMenData")) {
                 StreamSupport.stream(csvIterable.spliterator(), false).
-                        map(BatsMen.class::cast).
+                        map(BatsMenData.class::cast).
                         forEach(iplDataCsv -> iplAnalysisMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
-            } else if(iplDataCsvClass.getName().equals("cricketanalyser.Bowlers")) {
+            } else if(iplDataCsvClass.getName().equals("cricketanalyser.BowlersData")) {
                 StreamSupport.stream(csvIterable.spliterator(), false).
-                        map(Bowlers.class::cast).
+                        map(BowlersData.class::cast).
                         forEach(iplDataCsv -> iplAnalysisMap.put(iplDataCsv.player, new CricketDataDAO(iplDataCsv)));
             }
             if(iplAnalysisMap.size() == 0)
