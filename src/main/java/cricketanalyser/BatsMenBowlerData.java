@@ -1,6 +1,6 @@
 package cricketanalyser;
 
-public class BatsMenBowlerCombinationData {
+public class BatsMenBowlerData {
 
     public String player;
     public int four;
@@ -11,8 +11,8 @@ public class BatsMenBowlerCombinationData {
     public double battingStrikeRate;
     public int wickets;
 
-    public BatsMenBowlerCombinationData(String player, int four, int six, int runs, double battingAverage,
-                                        double bowlerAverage, double battingStrikeRate, int wickets) {
+    public BatsMenBowlerData(String player, int four, int six, int runs, double battingAverage,
+                             double bowlerAverage, double battingStrikeRate, int wickets) {
         this.player = player;
         this.four = four;
         this.six = six;

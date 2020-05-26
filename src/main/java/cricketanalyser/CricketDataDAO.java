@@ -38,10 +38,9 @@ public class CricketDataDAO {
     public Object getCricketDataDTO(CricketAnalyser.CricketData data) {
         if(data.equals(CricketAnalyser.CricketData.BATSMEN))
             return new BatsMenData(player,runs, battingAverage, battingStrikeRate,fours,sixes);
-        else if (data.equals(CricketAnalyser.CricketData.BATSMEN))
+        if (data.equals(CricketAnalyser.CricketData.BATSMEN))
             return new BowlersData(player,wickets, battingAverage,economy, battingStrikeRate,fourWickets,fiveWickets);
-        else
-            return new BatsMenBowlerCombinationData(player,fours,sixes,runs,battingAverage, bowlingAverage,
-                                                    battingStrikeRate,wickets);
+        return new BatsMenBowlerData(player,fours,sixes,runs,battingAverage, bowlingAverage,
+                                                battingStrikeRate,wickets);
     }
 }
